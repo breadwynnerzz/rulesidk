@@ -385,9 +385,9 @@ mark {
 .rules-topbar { display: flex; align-items: center; gap: 18px; min-height: 54px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .site-mark { display: block; flex: 0 0 auto; width: 120px; }
 .site-mark img { display: block; width: 100%; height: auto; max-height: 58px; object-fit: contain; }
-.book-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-left: auto; }
-.book-links a { padding: 7px 9px; color: var(--muted); font-size: 13px; border-bottom: 1px solid transparent; }
-.book-links a:hover, .book-links a:focus-visible { color: #fff; border-bottom-color: var(--red); outline: none; }
+.book-picker { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+.book-picker select { min-width: 220px; padding: 9px 30px 9px 10px; color: var(--text); font: 600 13px var(--sans); background: #0b0b0b; border: 1px solid rgba(255, 88, 96, .28); border-radius: 5px; }
+.book-picker select:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 .back-home { flex: 0 0 auto; padding: 9px 12px; color: #ffd9dc; font: 700 12px var(--sans); cursor: pointer; background: #17090b; border: 1px solid rgba(255, 108, 116, .22); border-radius: 6px; }
 .back-home:hover, .back-home:focus-visible { color: #fff; border-color: var(--red); }
 .rules-topbar .discord-link { flex: 0 0 auto; }
@@ -406,7 +406,8 @@ mark {
 
 @media (max-width: 850px) {
   .rules-topbar { flex-wrap: wrap; }
-  .book-links { order: 3; width: 100%; margin-left: 0; }
+  .book-picker { order: 3; width: 100%; margin-left: 0; }
+  .book-picker select { flex: 1; }
 }
 
 @media (max-width: 720px) {

@@ -119,8 +119,11 @@ function renderSite(units) {
   const assetPath = location.protocol === "file:" ? "assets" : "/assets";
   const shell = document.createElement("div");
   shell.className = "rules-shell";
-  shell.innerHTML = `<header class="rules-topbar"><a class="site-mark" href="/main" aria-label="Main City Rules"><img src="${assetPath}/brick-city-rp-transparent.png" alt="Brick City RP"></a><nav class="book-links" aria-label="Rulebooks"><a href="/main">Main</a><a href="/faction">Faction</a><a href="/emergency-services">Emergency</a></nav><a class="discord-link" href="https://discord.gg/brickcityrp" target="_blank" rel="noreferrer">discord.gg/brickcityrp</a></header><main class="rules-content"><section class="rules-heading"><p class="rule-number"></p><h1></h1><p class="rules-intro"></p></section><div class="rules-sheet"></div></main>`;
+  shell.innerHTML = `<header class="rules-topbar"><a class="site-mark" href="/main" aria-label="Main City Rules"><img src="${assetPath}/brick-city-rp-transparent.png" alt="Brick City RP"></a><label class="book-picker"><span>Rulebook</span><select aria-label="Choose a rulebook"><option value="/main">Main City Rules</option><option value="/faction">Faction / Interaction Rules</option><option value="/emergency-services">Emergency Services Rules</option></select></label><a class="discord-link" href="https://discord.gg/brickcityrp" target="_blank" rel="noreferrer">discord.gg/brickcityrp</a></header><main class="rules-content"><section class="rules-heading"><p class="rule-number"></p><h1></h1><p class="rules-intro"></p></section><div class="rules-sheet"></div></main>`;
   app.append(shell);
+  const bookSelect = shell.querySelector(".book-picker select");
+  bookSelect.value = routeKey === "interaction" ? "/faction" : routeKey === "emergency" ? "/emergency-services" : "/main";
+  bookSelect.addEventListener("change", () => { window.location.href = bookSelect.value; });
   const content = shell.querySelector(".rules-sheet");
   shell.querySelector(".rules-heading .rule-number").textContent = config.eyebrow;
   shell.querySelector(".rules-heading h1").textContent = config.title;
