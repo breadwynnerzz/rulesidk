@@ -113,41 +113,24 @@ function assignUnits(sections) {
 }
 
 function renderSite(units) {
-  const landing = document.createElement("main");
-  landing.className = "landing-screen";
-  landing.innerHTML = '<p class="landing-eyebrow">BRICK CITY RP</p><div class="rule-set-choices" role="navigation" aria-label="Rulebooks"></div>';
-  const choices = landing.querySelector(".rule-set-choices");
-  for (const [key, config] of Object.entries(SETS)) {
-    const button = document.createElement("button");
-    button.className = "rule-set-choice";
-    button.type = "button";
-    button.dataset.openSet = key;
-    button.innerHTML = `<span class="choice-number">0${Object.keys(SETS).indexOf(key) + 1}</span><span class="choice-label"><strong></strong></span><span class="choice-arrow" aria-hidden="true">→</span>`;
-    button.querySelector("strong").textContent = config.title;
-    choices.append(button);
-  }
+  const path = location.pathname.replace(/\/+$/, "") || "/main";
+  const routeKey = path === "/faction" ? "interaction" : path === "/emergency-services" ? "emergency" : "main";
+  const config = SETS[routeKey];
+  const assetPath = location.protocol === "file:" ? "assets" : "/assets";
   const shell = document.createElement("div");
-  shell.className = "rules-shell hidden";
-  shell.innerHTML = '<header class="rules-topbar"><button class="back-home" type="button">← Home</button><a class="discord-link" href="https://discord.gg/brickcityrp" target="_blank" rel="noreferrer">discord.gg/brickcityrp</a></header><aside class="outline-nav" aria-label="Rule sections"><a class="sidebar-brand" href="#home" aria-label="Brick City RP home"><img src="assets/brick-city-rp-transparent.png" alt="Brick City RP"></a><h2 class="outline-set-title"></h2><div class="outline-tab"><span class="tab-icon">▤</span><span>Table of Contents</span></div><nav class="outline-list"></nav><img class="sidebar-motto" src="assets/more-than-a-server-transparent.png" alt="More than a server"></aside><main class="rules-content"><section class="rules-heading"><p class="rule-number"></p><h1></h1><p class="rules-intro"></p></section><div class="rules-sheet"></div></main></div>';
-  app.append(landing, shell);
-  const list = shell.querySelector(".outline-list");
+  shell.className = "rules-shell";
+  shell.innerHTML = `<header class="rules-topbar"><a class="site-mark" href="/main" aria-label="Main City Rules"><img src="${assetPath}/brick-city-rp-transparent.png" alt="Brick City RP"></a><nav class="book-links" aria-label="Rulebooks"><a href="/main">Main</a><a href="/faction">Faction</a><a href="/emergency-services">Emergency</a></nav><a class="discord-link" href="https://discord.gg/brickcityrp" target="_blank" rel="noreferrer">discord.gg/brickcityrp</a></header><main class="rules-content"><section class="rules-heading"><p class="rule-number"></p><h1></h1><p class="rules-intro"></p></section><div class="rules-sheet"></div></main>`;
+  app.append(shell);
   const content = shell.querySelector(".rules-sheet");
-  const scrollTargets = new Map();
+  shell.querySelector(".rules-heading .rule-number").textContent = config.eyebrow;
+  shell.querySelector(".rules-heading h1").textContent = config.title;
+  shell.querySelector(".rules-intro").textContent = config.intro;
+  const renderUnits = routeKey === "emergency"
+    ? [...units[routeKey]].sort((a, b) => emergencyGroupOrder.indexOf(a.category) - emergencyGroupOrder.indexOf(b.category))
+    : units[routeKey];
   let lastEmergencyGroup = "";
-  const renderSet = (key) => {
-    const config = SETS[key];
-    shell.dataset.activeSet = key;
-    shell.querySelector(".outline-set-title").textContent = config.title;
-    shell.querySelector(".rules-heading .rule-number").textContent = config.eyebrow;
-    shell.querySelector(".rules-heading h1").textContent = config.title;
-    shell.querySelector(".rules-intro").textContent = config.intro;
-    list.replaceChildren(); content.replaceChildren();
-    lastEmergencyGroup = "";
-    const renderUnits = key === "emergency"
-      ? [...units[key]].sort((a, b) => emergencyGroupOrder.indexOf(a.category) - emergencyGroupOrder.indexOf(b.category))
-      : units[key];
-    for (const unit of renderUnits) {
-      if (key === "emergency" && unit.category !== lastEmergencyGroup) {
+  for (const unit of renderUnits) {
+      if (routeKey === "emergency" && unit.category !== lastEmergencyGroup) {
         const group = document.createElement("h2");
         group.className = "rules-group-heading";
         group.textContent = unit.category;
@@ -162,42 +145,11 @@ function renderSite(units) {
         const h3 = document.createElement("h3"); h3.textContent = sub.title; article.append(h3); appendBlocks(article, sub.blocks);
       }
       content.append(article);
-      const link = document.createElement("a"); link.href = `#${article.id}`; link.textContent = unit.title; list.append(link);
-      scrollTargets.set(article.id, key);
-    }
-    landing.classList.add("hidden"); shell.classList.remove("hidden");
-    if (location.hash !== `#set-${key}`) history.pushState({ set: key }, "", `#set-${key}`);
-    window.scrollTo({ top: 0, behavior: "instant" });
-  };
-  const showLanding = (record = true) => {
-    shell.classList.add("hidden"); landing.classList.remove("hidden");
-    if (record && location.hash) history.pushState({ home: true }, "", "#home");
-    window.scrollTo({ top: 0, behavior: "instant" });
-  };
-  const openAnchor = (id, record = true) => {
-    const key = scrollTargets.get(id);
-    if (!key) return false;
-    if (shell.dataset.activeSet !== key) renderSet(key);
-    const target = document.getElementById(id);
-    if (record) history.pushState({ set: key, anchor: id }, "", `#${id}`);
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    return true;
-  };
-  choices.addEventListener("click", (event) => { const button = event.target.closest("[data-open-set]"); if (button) renderSet(button.dataset.openSet); });
-  shell.querySelector(".back-home").addEventListener("click", () => showLanding());
-  list.addEventListener("click", (event) => { const link = event.target.closest("a[href^='#']"); if (link) { event.preventDefault(); openAnchor(link.hash.slice(1)); } });
-  window.addEventListener("popstate", () => {
-    const id = location.hash.slice(1);
-    if (id === "home" || !id) showLanding(false);
-    else if (scrollTargets.has(id)) openAnchor(id, false);
-    else if (id.startsWith("set-")) renderSet(id.slice(4));
-  });
-  const firstId = location.hash.slice(1);
-  if (scrollTargets.has(firstId)) openAnchor(firstId, false);
-  else if (firstId.startsWith("set-") && SETS[firstId.slice(4)]) renderSet(firstId.slice(4));
+  }
 }
 
-fetch("RULES_BY_CATEGORY.md", { cache: "no-store" })
+const rulesSource = location.protocol === "file:" ? "RULES_BY_CATEGORY.md" : "/RULES_BY_CATEGORY.md";
+fetch(rulesSource, { cache: "no-store" })
   .then((response) => { if (!response.ok) throw new Error("Could not load the rules source."); return response.text(); })
   .then(parseRules)
   .then(assignUnits)

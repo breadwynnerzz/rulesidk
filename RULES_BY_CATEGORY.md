@@ -267,7 +267,7 @@ Examples listed on the site:
 
 **### Greenzones**
 
-Police stations, hospitals, vehicle garages, and open player-owned businesses are **\*\*GREENZONES\*\***.
+Police stations, hospitals, vehicle garages, and player-owned businesses that are currently open are **\*\*GREENZONES\*\***.
 
 **\*\*Definition:\*\*** Protected areas where criminal activity is not allowed.
 
@@ -278,8 +278,6 @@ Greenzone locations listed on the site:
 \- Vehicle Garages
 
 \- City Hall
-
-\- Interior Banks
 
 \- Vehicle Dealerships
 
@@ -297,9 +295,25 @@ Greenzone locations listed on the site:
 
 \- Clothing Store
 
-Closed businesses are treated as normal locations and are not Greenzones. Moneywash locations are not Greenzones.
+Closed businesses are regular city locations. Banks are not Greenzones. Moneywash and Cayo Perico are **\*\*RED ZONES\*\***.
 
 If a scene starts outside a Greenzone and moves into one, you cannot use the Greenzone to escape the scene. Staff may review the situation based on what happened.
+
+**### Red Zones**
+
+Moneywash and Cayo Perico are high-risk **\*\*RED ZONES\*\***.
+
+1\. In a Red Zone, you may start a robbery right away without the usual 2 minutes of roleplay.
+
+2\. You still need to make a clear demand and give the other person a chance to respond. You cannot pull up and shoot someone right away.
+
+3\. If the person cooperates, you cannot kill them. If they fight back, pull a weapon, or try to escape after your demand, you may defend yourself.
+
+4\. Being in a Red Zone does not make anyone KOS. If you came there planning to kill someone, you still need a valid reason and some roleplay first.
+
+5\. PD still follows its normal use-of-force rules. EMS waits until the scene is safe.
+
+**\*\*Example:\*\*** If someone is farming at Cayo and you run up, pull a gun, and tell them to put their hands up for a robbery, that is allowed without the 2-minute buildup. They can still fight back if they believe they have a fair chance. You cannot shoot them before making the demand and giving them a chance to react.
 
 **### Third-Party Modifications**
 
