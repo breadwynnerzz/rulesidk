@@ -160,7 +160,7 @@ Players may recognize a masked person through legitimate in-character familiarit
 
 **### Powergaming**
 
-**\*\*Definition:\*\*** Performing actions that would be impossible, unrealistic, or not reasonably achievable.
+**\*\*Definition:\*\*** Using normal game functions in a way that gives you an unfair or unrealistic roleplay advantage.
 
 Examples listed on the site:
 
@@ -267,37 +267,35 @@ Examples listed on the site:
 
 **### Greenzones**
 
-Police stations, hospitals, vehicle garages, and player-owned businesses that are currently open are **\*\*GREENZONES\*\***.
+Only government buildings, Legion, approved event areas, and player-owned businesses that are currently open and actively operating are **\*\*GREENZONES\*\***.
 
-**\*\*Definition:\*\*** Protected areas where criminal activity is not allowed.
+**\*\*Definition:\*\*** Protected areas where any illegal activity is strictly prohibited. Breaking this rule will result in punishment.
 
-Greenzone locations listed on the site:
+Greenzone locations:
 
-\- Hospital
+\- Government Buildings
 
-\- Vehicle Garages
+\- Legion
 
-\- City Hall
-
-\- Vehicle Dealerships
-
-\- Designated Businesses while open and actively operating
-
-\- Administrative Event Areas
-
-\- Casino except parking lot
+\- Approved Event Areas
 
 \- Player-Owned Businesses while open and actively operating
 
-\- Tattoo Shop
-
-\- Hair Shop
-
-\- Clothing Store
-
-Closed businesses are regular city locations. Banks are not Greenzones. Moneywash and Cayo Perico are **\*\*RED ZONES\*\***.
+Closed businesses and any location not listed above are regular city locations. Banks are not Greenzones. Moneywash and Cayo Perico are **\*\*RED ZONES\*\***.
 
 If a scene starts outside a Greenzone and moves into one, you cannot use the Greenzone to escape the scene. Staff may review the situation based on what happened.
+
+**### Business Activity**
+
+1\. Player-owned businesses must stay active and operate in the city.
+
+2\. Businesses that remain inactive may receive business warnings or strikes.
+
+3\. A business may receive up to 3 warnings or strikes for inactivity.
+
+4\. After the third warning or strike, management may remove the business and make it available for someone else.
+
+5\. Business owners should notify management if they need time away or cannot operate for a while.
 
 **### Red Zones**
 
